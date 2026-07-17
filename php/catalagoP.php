@@ -1,5 +1,5 @@
 <?php
-include("conexionP.php");
+include("../proyecto-2-/php/conexionP.php");
 
 $sql = "SELECT * FROM productos";
 $resultado = mysqli_query($conexion,$sql);
