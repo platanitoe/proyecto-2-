@@ -2,7 +2,15 @@
 include("../proyecto-2-/php/conexionP.php");
 
 $sql = "SELECT * FROM productos";
-$resultado = mysqli_query($conexion,$sql);
+$resultado = mysqli_query($conexion, $sql);
+
+while($producto = mysqli_fetch_assoc($resultado)){
+    echo "<h3>".$producto['nombre']."</h3>";
+    echo "<p>".$producto['descripcion']."</p>";
+    echo "<p>Precio: $".$producto['precio']."</p>";
+    echo "<p>Stock: ".$producto['stock']."</p>";
+    echo "<hr>";
+  }
 ?>
 
 <!DOCTYPE html>
