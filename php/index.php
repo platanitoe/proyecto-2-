@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+<<<<<<< HEAD
 
 <head>
 
@@ -51,4 +52,3 @@ Crear Cuenta
 
 </body>
 
-</html>
