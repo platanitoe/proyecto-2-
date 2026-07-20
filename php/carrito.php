@@ -12,7 +12,6 @@ if(!isset($_SESSION['usuario'])){
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -22,24 +21,59 @@ if(!isset($_SESSION['usuario'])){
 
 <title>Carrito</title>
 
+<link rel="stylesheet" href="../css/estilos.css">
+
 </head>
 
 
 <body>
 
 
-<h1>Carrito de compras</h1>
+<center>
+
+<h1>Carrito de compras </h1>
+
+</center>
 
 
-<div id="productos"></div>
+
+<div id="listaProductos"></div>
 
 
 <h2 id="total"></h2>
 
 
+
+<br>
+
+
 <a href="catalogoP.php">
 Seguir comprando
 </a>
+
+
+
+<br><br>
+
+
+
+<form action="guardarpedido.php" method="POST" onsubmit="enviarCarrito()">
+
+
+<input 
+type="hidden" 
+name="carrito" 
+id="carrito">
+
+
+<button type="submit">
+Realizar compra
+</button>
+
+
+</form>
+
+
 
 
 <script>
@@ -48,30 +82,58 @@ Seguir comprando
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 
-let lista = document.getElementById("productos");
+let lista = document.getElementById("listaProductos");
 
 let total = 0;
 
 
 
-carrito.forEach(producto => {
+if(carrito.length === 0){
 
 
-lista.innerHTML += `
-
-<p>
-${producto.nombre} 
-- $${producto.precio}
-
-</p>
-
-`;
+    lista.innerHTML = 
+    "<h3>El carrito está vacío</h3>";
 
 
-total += Number(producto.precio);
+}else{
 
 
-});
+    carrito.forEach(producto => {
+
+
+
+        lista.innerHTML += `
+
+
+        <div class="producto">
+
+
+            <h3>
+            ${producto.nombre}
+            </h3>
+
+
+            <p>
+            Precio: $${producto.precio}
+            </p>
+
+
+        </div>
+
+
+        `;
+
+
+
+        total += Number(producto.precio);
+
+
+
+    });
+
+
+
+}
 
 
 
@@ -79,8 +141,22 @@ document.getElementById("total").innerHTML =
 "Total: $" + total;
 
 
+
+
+// Envía los productos al PHP
+
+function enviarCarrito(){
+
+
+    document.getElementById("carrito").value =
+    JSON.stringify(carrito);
+
+
+}
+
+
+
 </script>
-<script src="../js/carrito.js"></script>
 
 
 </body>
