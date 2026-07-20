@@ -1,6 +1,6 @@
 <?php
 
-include("../proyecto-2-/php/conexionP.php");
+include("../proyecto-2-/php/conexion.php");
 
 $sql = "SELECT * FROM productos";
 
