@@ -1,16 +1,11 @@
 <?php
+
 include("../proyecto-2-/php/conexionP.php");
 
 $sql = "SELECT * FROM productos";
-$resultado = mysqli_query($conexion, $sql);
 
-while($producto = mysqli_fetch_assoc($resultado)){
-    echo "<h3>".$producto['nombre']."</h3>";
-    echo "<p>".$producto['descripcion']."</p>";
-    echo "<p>Precio: $".$producto['precio']."</p>";
-    echo "<p>Stock: ".$producto['stock']."</p>";
-    echo "<hr>";
-  }
+$resultado = mysqli_query($conexion,$sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -26,23 +21,42 @@ while($producto = mysqli_fetch_assoc($resultado)){
 
 </head>
 
+
 <body>
 
-<h1> Catálogo de Productos</h1>
+<h1>Catálogo de Productos</h1>
+
 
 <div class="contenedor">
 
+
 <?php while($producto=mysqli_fetch_assoc($resultado)){ ?>
+
 
 <div class="producto">
 
-<h2><?php echo $producto['nombre']; ?></h2>
 
-<p><?php echo $producto['descripcion']; ?></p>
+<h2>
+<?php echo $producto['nombre']; ?>
+</h2>
 
-<h3>$<?php echo $producto['precio']; ?></h3>
 
-<p>Stock disponible: <?php echo $producto['stock']; ?></p>
+<p>
+<?php echo $producto['descripcion']; ?>
+</p>
+
+
+<h3>
+$<?php echo $producto['precio']; ?>
+</h3>
+
+
+<p>
+Stock disponible:
+<?php echo $producto['stock']; ?>
+</p>
+
+
 
 <button onclick="agregar(
 <?php echo $producto['id']; ?>,
@@ -52,13 +66,19 @@ while($producto = mysqli_fetch_assoc($resultado)){
 Agregar al carrito
 </button>
 
+
 </div>
+
 
 <?php } ?>
 
+
 </div>
+
 
 <script src="carrito.js"></script>
 
+
 </body>
+
 </html>
