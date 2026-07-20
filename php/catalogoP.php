@@ -1,6 +1,18 @@
 <?php
 
-include("../proyecto-2-/php/conexion.php");
+session_start();
+
+
+if(!isset($_SESSION['usuario'])){
+
+    header("Location: ../html/login.html");
+    exit();
+
+}
+
+
+include("conexion.php");
+
 
 $sql = "SELECT * FROM productos";
 
@@ -72,6 +84,9 @@ Agregar al carrito
 
 <?php } ?>
 
+<a href="carrito.php">
+Ver carrito 
+</a>
 
 </div>
 

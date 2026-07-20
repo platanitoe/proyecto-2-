@@ -1,135 +1,76 @@
 <?php
 
-include("sesiones.php");
-include("conexion.php");
+session_start();
 
-if($_SERVER["REQUEST_METHOD"]=="POST"){
 
-$datos=json_decode(file_get_contents("php://input"),true);
+if(!isset($_SESSION['usuario'])){
 
-$idUsuario=$_SESSION["id"];
-
-$sql="INSERT INTO compras(id_usuario)
-
-VALUES($idUsuario)";
-
-$conexion->query($sql);
-
-$idCompra=$conexion->insert_id;
-
-foreach($datos as $producto){
-
-$id=$producto["id"];
-
-$cantidad=$producto["cantidad"];
-
-$precio=$producto["precio"];
-
-$sql="INSERT INTO detalle_compra(
-
-id_compra,
-id_producto,
-cantidad,
-precio
-
-)
-
-VALUES(
-
-$idCompra,
-$id,
-$cantidad,
-$precio
-
-)";
-
-$conexion->query($sql);
-
-$conexion->query(
-
-"UPDATE productos
-
-SET stock=stock-$cantidad
-
-WHERE id=$id"
-
-);
-
-}
-
-echo "Compra realizada correctamente.";
-
-exit();
+    header("Location: ../html/login.html");
+    exit();
 
 }
 
 ?>
 
 <!DOCTYPE html>
-
-<html lang="es">
+<html>
 
 <head>
 
-<meta charset="UTF-8">
-
 <title>Carrito</title>
-
-<link rel="stylesheet" href="../css/estilos.css">
 
 </head>
 
-<body onload="mostrarCarrito()">
 
-<h2>Carrito de Compras</h2>
+<body>
 
-<table>
 
-<thead>
+<h1>Carrito de compras</h1>
 
-<tr>
 
-<th>Producto</th>
+<div id="lista"></div>
 
-<th>Cantidad</th>
 
-<th>Precio</th>
+<h2 id="total"></h2>
 
-<th>Subtotal</th>
 
-<th>Acción</th>
+<script>
 
-</tr>
 
-</thead>
+let carrito =
+JSON.parse(localStorage.getItem("carrito")) || [];
 
-<tbody id="tabla">
 
-</tbody>
+let lista=document.getElementById("lista");
 
-</table>
+let total=0;
 
-<h2>Total:
 
-<span id="total"></span>
+carrito.forEach(producto=>{
 
-</h2>
 
-<button onclick="comprar()">
+lista.innerHTML +=
+`
+<p>
+${producto.nombre}
+- $${producto.precio}
+</p>
+`;
 
-Finalizar Compra
 
-</button>
+total += producto.precio;
 
-<br><br>
 
-<a href="catalogo.php">
+});
 
-Regresar
 
-</a>
+document.getElementById("total").innerHTML =
+"Total: $" + total;
 
-<script src="../js/carrito.js"></script>
+
+
+</script>
+
 
 </body>
 
