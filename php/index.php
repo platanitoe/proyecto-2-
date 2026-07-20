@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
-<<<<<<< HEAD
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tienda de Celulares</title>
+    <title>Tienda de Celulares</title>
 
-<link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+
 
 </head>
 
 <body>
 
-<div class="contenedor-login">
+    <div class="contenedor-login">
 
-<h1>Tienda de Celulares</h1>
+        <h1>📱 Tienda de Celulares</h1>
 
-<form action="php/login.php" method="POST">
+        <p>Inicia sesión para acceder a la tienda.</p>
 
-<input
-type="email"
-name="correo"
-placeholder="Correo"
-required>
+        <form action="login.php" method="POST">
 
-<input
-type="password"
-name="password"
-placeholder="Contrasena"
-required>
+            <input
+                type="email"
+                name="correo"
+                placeholder="Correo electrónico"
+                required>
 
-<button>
+            <input
+                type="password"
+                name="password"
+                placeholder="Contraseña"
+                required>
 
-Iniciar Sesión
+            <button type="submit">
+                Iniciar Sesión
+            </button>
 
-</button>
+        </form>
 
-</form>
+        <br>
 
-<br>
+        <p>¿No tienes una cuenta?</p>
 
-<a href="html/registro.html">
+        <a class="registro" href="html/registro.html">
+            Crear Cuenta
+        </a>
 
-Crear Cuenta
-
-</a>
-
-</div>
+    </div>
 
 </body>
 
+</html>
