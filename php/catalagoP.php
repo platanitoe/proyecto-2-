@@ -22,7 +22,7 @@ while($producto = mysqli_fetch_assoc($resultado)){
 
 <title>Catálogo</title>
 
-<link rel="stylesheet" href="estilos.css">
+<link rel="stylesheet" href="../css/estilos.css">
 
 </head>
 

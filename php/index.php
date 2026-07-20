@@ -8,7 +8,7 @@
 
     <title>Tienda de Celulares</title>
 
-    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="css/estilos.css">
 
 
 </head>
@@ -17,11 +17,11 @@
 
     <div class="contenedor-login">
 
-        <h1>📱 Tienda de Celulares</h1>
+        <h1> Tienda de Celulares</h1>
 
         <p>Inicia sesión para acceder a la tienda.</p>
 
-        <form action="login.php" method="POST">
+        <form action="php/login.php" method="POST">
 
             <input
                 type="email"
@@ -45,7 +45,7 @@
 
         <p>¿No tienes una cuenta?</p>
 
-        <a class="registro" href="html/registro.html">
+        <a href="html/registro.html">
             Crear Cuenta
         </a>
 
