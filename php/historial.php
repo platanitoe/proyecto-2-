@@ -34,7 +34,7 @@ $resultado = mysqli_query($conexion,$sql);
 
 <title>Historial de compras</title>
 
-<link rel="stylesheet" href="../css/estilos.css">
+<link rel="stylesheet" href="../css/estilosP.css">
 
 </head>
 

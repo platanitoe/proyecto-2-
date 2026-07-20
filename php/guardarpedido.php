@@ -51,7 +51,7 @@ $id_pedido = mysqli_insert_id($conexion);
 foreach($carrito as $producto){
 
 
-    $sql = "INSERT INTO detalle_pedido
+    $sql = "INSERT INTO detalle_p
     (id_pedido,id_producto,cantidad,precio)
 
     VALUES

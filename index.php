@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="contenedor-login">
-        <h1>📱 Tienda de Celulares</h1>
+        <h1>Tienda de Celulares</h1>
         <p>Inicia sesión para acceder a la tienda.</p>
         
         <form action="php/login.php" method="POST">
