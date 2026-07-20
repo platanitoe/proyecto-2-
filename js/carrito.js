@@ -1,24 +1,12 @@
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+console.log("carrito.js cargado");
 
 
 function agregar(id,nombre,precio){
 
-    let producto = {
-        id:id,
-        nombre:nombre,
-        precio:precio
-    };
+    console.log("Producto:", id, nombre, precio);
 
-
-    carrito.push(producto);
-
-
-    localStorage.setItem(
-        "carrito",
-        JSON.stringify(carrito)
+    alert(
+        "Agregado: " + nombre
     );
-
-
-    alert("Producto agregado al carrito");
 
 }

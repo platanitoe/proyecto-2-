@@ -12,10 +12,13 @@ if(!isset($_SESSION['usuario'])){
 
 ?>
 
+
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
+
+<meta charset="UTF-8">
 
 <title>Carrito</title>
 
@@ -28,48 +31,56 @@ if(!isset($_SESSION['usuario'])){
 <h1>Carrito de compras</h1>
 
 
-<div id="lista"></div>
+<div id="productos"></div>
 
 
 <h2 id="total"></h2>
 
 
+<a href="catalogoP.php">
+Seguir comprando
+</a>
+
+
 <script>
 
 
-let carrito =
-JSON.parse(localStorage.getItem("carrito")) || [];
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 
-let lista=document.getElementById("lista");
+let lista = document.getElementById("productos");
 
-let total=0;
-
-
-carrito.forEach(producto=>{
+let total = 0;
 
 
-lista.innerHTML +=
-`
+
+carrito.forEach(producto => {
+
+
+lista.innerHTML += `
+
 <p>
-${producto.nombre}
+${producto.nombre} 
 - $${producto.precio}
+
 </p>
+
 `;
 
 
-total += producto.precio;
+total += Number(producto.precio);
 
 
 });
+
 
 
 document.getElementById("total").innerHTML =
 "Total: $" + total;
 
 
-
 </script>
+<script src="../js/carrito.js"></script>
 
 
 </body>

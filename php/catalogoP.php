@@ -18,7 +18,9 @@ $sql = "SELECT * FROM productos";
 
 $resultado = mysqli_query($conexion,$sql);
 
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -36,31 +38,35 @@ $resultado = mysqli_query($conexion,$sql);
 
 <body>
 
+
 <h1>Catálogo de Productos</h1>
 
 
 <div class="contenedor">
 
 
-<?php while($producto=mysqli_fetch_assoc($resultado)){ ?>
+<?php while($producto = mysqli_fetch_assoc($resultado)){ ?>
 
 
 <div class="producto">
 
 
 <h2>
-<?php echo $producto['nombre']; ?>
+<?php echo htmlspecialchars($producto['nombre']); ?>
 </h2>
 
 
+
 <p>
-<?php echo $producto['descripcion']; ?>
+<?php echo htmlspecialchars($producto['descripcion']); ?>
 </p>
+
 
 
 <h3>
 $<?php echo $producto['precio']; ?>
 </h3>
+
 
 
 <p>
@@ -70,13 +76,15 @@ Stock disponible:
 
 
 
+
 <button onclick="agregar(
 <?php echo $producto['id']; ?>,
-'<?php echo $producto['nombre']; ?>',
+'<?php echo htmlspecialchars($producto['nombre']); ?>',
 <?php echo $producto['precio']; ?>
 )">
 Agregar al carrito
 </button>
+
 
 
 </div>
@@ -84,14 +92,22 @@ Agregar al carrito
 
 <?php } ?>
 
-<a href="carrito.php">
-Ver carrito 
-</a>
 
 </div>
 
 
-<script src="carrito.js"></script>
+<br>
+
+
+<a href="carrito.php">
+    <center>
+        <button>Ver carrito</button>
+    </center>
+</a>
+
+
+
+<script src="../js/carrito.js"></script>
 
 
 </body>
