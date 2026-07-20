@@ -5,10 +5,10 @@ $usuario = "root";
 $password = "";
 $bd = "proyecto";
 
-$conexion = new mysqli($servidor,$usuario,$password,$bd);
+$conexion = new mysqli($servidor, $usuario, $password, $bd);
 
-if($conexion->connect_error){
-    die("Error de conexión: ".$conexion->connect_error);
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
 }
 
 ?>

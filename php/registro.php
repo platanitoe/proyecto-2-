@@ -1,61 +1,56 @@
-<!DOCTYPE html>
+<?php
 
-<html lang="es">
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-<head>
+include("conexion.php");
 
-<meta charset="UTF-8">
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-<title>Registro</title>
+    $nombre = trim($_POST["nombre"]);
+    $correo = trim($_POST["correo"]);
+    $password = trim($_POST["password"]);
+    $conexion = new mysqli("localhost", "root", "", "proyecto");
 
-<link rel="stylesheet" href="../css/estilos.css">
+    // Verificar si el correo ya existe
+    $consulta = "SELECT id FROM usuarios WHERE correo='$correo'";
+    $resultado = $conexion->query($consulta);
 
-</head>
+    if ($resultado->num_rows > 0) {
 
-<body>
+        echo "<script>
+                alert('El correo ya está registrado');
+                window.location='../html/registro.html';
+              </script>";
+        exit();
 
-<div class="contenedor-login">
+    }
 
-<h2>Crear Cuenta</h2>
+    // Encriptar contraseña
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-<form action="../php/registro.php" method="POST">
+    // Guardar usuario
+    $sql = "INSERT INTO usuarios(nombre, correo, password, tipo)
+            VALUES('$nombre', '$correo', '$passwordHash', 'usuario')";
 
-<input
-type="text"
-name="nombre"
-placeholder="Nombre"
-required>
+    if ($conexion->query($sql)) {
 
-<input
-type="email"
-name="correo"
-placeholder="Correo"
-required>
+        echo "<script>
+                alert('Usuario registrado correctamente');
+                window.location='../index.php';
+              </script>";
 
-<input
-type="password"
-name="password"
-placeholder="Contrasena"
-required>
+    } else {
 
-<button>
+        echo "Error al registrar: " . $conexion->error;
 
-Registrarse
+    }
 
-</button>
+} else {
 
-</form>
+    header("Location: ../html/registro.html");
+    exit();
 
-<br>
+}
 
-<a href="../index.php">
-
-Volver
-
-</a>
-
-</div>
-
-</body>
-
-</html>
+?>
