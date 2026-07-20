@@ -1,46 +1,95 @@
 <?php
-include("../proyecto-2-/php/conexionP.php");
 
-$id = $_GET['id'];
+include("../php/conexion.php");
+
+
+$id=$_GET['id'];
+
+
+
+$producto=mysqli_fetch_assoc(
+
+mysqli_query($conexion,
+
+"SELECT * FROM productos WHERE id=$id")
+
+);
+
+
 
 if(isset($_POST['actualizar'])){
 
-    $nombre = $_POST['nombre'];
-    $descripcion = $_POST['descripcion'];
-    $precio = $_POST['precio'];
-    $stock = $_POST['stock'];
 
-    $sql = "UPDATE productos
-            SET nombre='$nombre',
-                descripcion='$descripcion',
-                precio='$precio',
-                stock='$stock'
-            WHERE id=$id";
+$nombre=$_POST['nombre'];
 
-    mysqli_query($conexion,$sql);
+$precio=$_POST['precio'];
 
-    header("Location: inventario.php");
+$stock=$_POST['stock'];
+
+
+
+mysqli_query($conexion,
+
+"UPDATE productos SET
+
+nombre='$nombre',
+
+precio='$precio',
+
+stock='$stock'
+
+WHERE id=$id");
+
+
+
+header("Location: productos.php");
+
+
 }
 
-$sql = "SELECT * FROM productos WHERE id=$id";
-$resultado = mysqli_query($conexion,$sql);
-$producto = mysqli_fetch_assoc($resultado);
+
+
 ?>
+
+
+<h1>Editar producto</h1>
+
 
 <form method="POST">
 
-Nombre:
-<input type="text" name="nombre" value="<?php echo $producto['nombre']; ?>"><br><br>
 
-Descripción:
-<input type="text" name="descripcion" value="<?php echo $producto['descripcion']; ?>"><br><br>
+Nombre:
+
+<input name="nombre"
+value="<?php echo $producto['nombre']; ?>">
+
+
+<br>
+
 
 Precio:
-<input type="number" step="0.01" name="precio" value="<?php echo $producto['precio']; ?>"><br><br>
+
+<input name="precio"
+value="<?php echo $producto['precio']; ?>">
+
+
+<br>
+
 
 Stock:
-<input type="number" name="stock" value="<?php echo $producto['stock']; ?>"><br><br>
 
-<input type="submit" name="actualizar" value="Actualizar">
+<input name="stock"
+value="<?php echo $producto['stock']; ?>">
+
+
+<br>
+
+
+<button name="actualizar">
+
+Actualizar
+
+</button>
+
 
 </form>

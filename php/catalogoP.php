@@ -39,7 +39,19 @@ $resultado = mysqli_query($conexion,$sql);
 <body>
 
 
+<center>
+
 <h1>Catálogo de Productos</h1>
+
+
+<h3>
+Bienvenido:
+<?php echo $_SESSION['nombre']; ?>
+</h3>
+
+
+</center>
+
 
 
 <div class="contenedor">
@@ -99,11 +111,40 @@ Agregar al carrito
 <br>
 
 
+<center>
+
+
 <a href="carrito.php">
-    <center>
-        <button>Ver carrito</button>
-    </center>
+
+<button>
+ Ver carrito
+</button>
+
 </a>
+
+
+
+<a href="historial.php">
+
+<button>
+ Mis compras
+</button>
+
+</a>
+
+
+
+<a href="cerrar_sesion.php">
+
+<button>
+ Cerrar sesión
+</button>
+
+</a>
+
+
+</center>
+
 
 
 

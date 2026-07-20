@@ -1,11 +1,18 @@
 <?php
-include("../proyecto-2-/php/conexionP.php");
 
-$id = $_GET['id'];
 
-$sql = "DELETE FROM productos WHERE id=$id";
+include("../php/conexion.php");
 
-mysqli_query($conexion,$sql);
 
-header("Location: inventario.php");
+$id=$_GET['id'];
+
+
+mysqli_query($conexion,
+
+"DELETE FROM productos WHERE id=$id");
+
+
+header("Location: productos.php");
+
+
 ?>

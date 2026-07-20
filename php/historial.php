@@ -1,176 +1,141 @@
 <?php
 
-include("sesiones.php");
+session_start();
+
 include("conexion.php");
 
-if($_SESSION["tipo"]=="admin"){
 
-$sql="SELECT
+if(!isset($_SESSION['usuario'])){
 
-compras.id,
-usuarios.nombre,
-productos.nombre AS producto,
-detalle_compra.cantidad,
-detalle_compra.precio,
-compras.fecha
-
-FROM compras
-
-INNER JOIN usuarios
-
-ON compras.id_usuario=usuarios.id
-
-INNER JOIN detalle_compra
-
-ON compras.id=detalle_compra.id_compra
-
-INNER JOIN productos
-
-ON detalle_compra.id_producto=productos.id";
-
-}else{
-
-$id=$_SESSION["id"];
-
-$sql="SELECT
-
-compras.id,
-productos.nombre AS producto,
-detalle_compra.cantidad,
-detalle_compra.precio,
-compras.fecha
-
-FROM compras
-
-INNER JOIN detalle_compra
-
-ON compras.id=detalle_compra.id_compra
-
-INNER JOIN productos
-
-ON detalle_compra.id_producto=productos.id
-
-WHERE compras.id_usuario=$id";
+    header("Location: ../html/login.html");
+    exit();
 
 }
 
-$resultado=$conexion->query($sql);
+
+$id = $_SESSION['id'];
+
+
+$sql = "SELECT * FROM pedidos WHERE id_usuario=$id";
+
+
+$resultado = mysqli_query($conexion,$sql);
+
 
 ?>
 
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
 
 <meta charset="UTF-8">
 
-<title>Historial</title>
+<title>Historial de compras</title>
 
 <link rel="stylesheet" href="../css/estilos.css">
 
 </head>
 
+
 <body>
 
-<h1>Historial de Compras</h1>
 
-<table>
+<center>
 
-<tr>
+<h1>Historial de compras</h1>
 
-<th>Compra</th>
 
-<?php
+<h3>
+Usuario:
+<?php echo $_SESSION['nombre']; ?>
+</h3>
 
-if($_SESSION["tipo"]=="admin"){
 
-echo "<th>Usuario</th>";
+</center>
 
-}
 
-?>
 
-<th>Producto</th>
+<div class="contenedor">
 
-<th>Cantidad</th>
 
-<th>Precio</th>
+<?php if(mysqli_num_rows($resultado) > 0){ ?>
 
-<th>Fecha</th>
 
-</tr>
+<?php while($pedido=mysqli_fetch_assoc($resultado)){ ?>
 
-<?php
 
-while($fila=$resultado->fetch_assoc()){
+<div class="producto">
 
-?>
 
-<tr>
+<h2>
+Pedido #<?php echo $pedido['id']; ?>
+</h2>
 
-<td><?php echo $fila["id"]; ?></td>
 
-<?php
+<p>
+Fecha:
+<?php echo $pedido['fecha']; ?>
+</p>
 
-if($_SESSION["tipo"]=="admin"){
 
-echo "<td>".$fila["nombre"]."</td>";
+<p>
+Total:
+$<?php echo $pedido['total']; ?>
+</p>
 
-}
 
-?>
+<p>
+Estado:
+<?php echo $pedido['estado']; ?>
+</p>
 
-<td><?php echo $fila["producto"]; ?></td>
 
-<td><?php echo $fila["cantidad"]; ?></td>
+</div>
 
-<td>$<?php echo $fila["precio"]; ?></td>
 
-<td><?php echo $fila["fecha"]; ?></td>
 
-</tr>
+<?php } ?>
 
-<?php
 
-}
+<?php }else{ ?>
 
-?>
 
-</table>
+<center>
+
+<h3>
+Aún no tienes compras realizadas
+</h3>
+
+</center>
+
+
+<?php } ?>
+
+
+</div>
+
+
 
 <br>
 
-<?php
 
-if($_SESSION["tipo"]=="admin"){
+<center>
 
-?>
 
-<a href="../admin/dashboard.php">
+<a href="catalogoP.php">
 
-Volver
-
-</a>
-
-<?php
-
-}else{
-
-?>
-
-<a href="catalogo.php">
-
-Volver
+<button>
+⬅ Regresar al catálogo
+</button>
 
 </a>
 
-<?php
 
-}
+</center>
 
-?>
+
 
 </body>
 

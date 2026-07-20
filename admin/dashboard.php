@@ -1,77 +1,91 @@
 <?php
 
-include("../php/sesiones.php");
+session_start();
 
-if($_SESSION["tipo"]!="admin"){
-    header("Location:../php/catalogo.php");
+include("../php/conexion.php");
+
+
+if(!isset($_SESSION['tipo']) || $_SESSION['tipo']!="admin"){
+
+    header("Location: ../index.php");
     exit();
+
 }
+
 
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html>
 
 <head>
 
-<meta charset="UTF-8">
-
 <title>Administrador</title>
+
 <link rel="stylesheet" href="../css/estilos.css">
 
 </head>
 
+
 <body>
 
-<header>
 
-<h1>Panel del Administrador</h1>
+<h1>Panel Administrador</h1>
 
-<p>Bienvenido <?php echo $_SESSION["nombre"]; ?></p>
 
-<nav>
+<h2>
+Bienvenido 
+<?php echo $_SESSION['nombre']; ?>
+</h2>
 
-<a href="inventario.php">Inventario</a>
 
-<a href="../php/historial.php">Historial</a>
 
-<a href="../php/cerrar_sesion.php">Cerrar Sesión</a>
+<div class="contenedor">
 
-</nav>
 
-</header>
+<div class="producto">
 
-<div class="panel">
+<h3>Productos</h3>
 
-<div class="card">
-
-<h2>Inventario</h2>
-
-<p>Agregar, editar y eliminar productos.</p>
-
-<a href="inventario.php">
-
-<button>Entrar</button>
-
+<a href="productos.php">
+Gestionar productos
 </a>
 
 </div>
 
-<div class="card">
 
-<h2>Historial</h2>
 
-<p>Consultar compras realizadas.</p>
+<div class="producto">
 
-<a href="../php/historial.php">
+<h3>Inventario</h3>
 
-<button>Ver</button>
-
+<a href="productos.php">
+Ver inventario
 </a>
 
 </div>
 
+
+
+<div class="producto">
+
+<h3>Pedidos</h3>
+
+<a href="pedidos.php">
+Ver pedidos
+</a>
+
 </div>
+
+
+</div>
+
+
+
+<a href="../php/cerrarSesion.php">
+Cerrar sesión
+</a>
+
 
 </body>
 

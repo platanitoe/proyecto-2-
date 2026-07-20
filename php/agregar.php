@@ -1,36 +1,86 @@
 <?php
-include("../proyecto-2-/php/conexionP.php");
+
+include("../php/conexion.php");
+
 
 if(isset($_POST['guardar'])){
 
-    $nombre = $_POST['nombre'];
-    $descripcion = $_POST['descripcion'];
-    $precio = $_POST['precio'];
-    $stock = $_POST['stock'];
 
-    $sql = "INSERT INTO productos(nombre,descripcion,precio,stock)
-            VALUES('$nombre','$descripcion','$precio','$stock')";
+$nombre=$_POST['nombre'];
 
-    mysqli_query($conexion,$sql);
+$descripcion=$_POST['descripcion'];
 
-    header("Location: inventario.php");
+$precio=$_POST['precio'];
+
+$stock=$_POST['stock'];
+
+
+
+$sql="INSERT INTO productos
+(nombre,descripcion,precio,stock)
+
+VALUES
+
+('$nombre','$descripcion','$precio','$stock')";
+
+
+mysqli_query($conexion,$sql);
+
+
+
+header("Location: productos.php");
+
+
 }
+
+
+
 ?>
+
+
+<h1>Agregar producto</h1>
+
 
 <form method="POST">
 
+
 Nombre:
-<input type="text" name="nombre"><br><br>
+
+<input name="nombre">
+
+
+<br>
+
 
 Descripción:
-<input type="text" name="descripcion"><br><br>
+
+<input name="descripcion">
+
+
+<br>
+
 
 Precio:
-<input type="number" step="0.01" name="precio"><br><br>
+
+<input name="precio">
+
+
+<br>
+
 
 Stock:
-<input type="number" name="stock"><br><br>
 
-<input type="submit" name="guardar" value="Guardar">
+<input name="stock">
+
+
+<br>
+
+
+<button name="guardar">
+
+Guardar
+
+</button>
+
 
 </form>
