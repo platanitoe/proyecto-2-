@@ -29,7 +29,6 @@ $stock=$_POST['stock'];
 
 
 mysqli_query($conexion,
-
 "UPDATE productos SET
 
 nombre='$nombre',
