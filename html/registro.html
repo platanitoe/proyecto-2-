@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
 
-<title>Registro</title>
-
-<link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/estilos.css">
 
 </head>
 
 <body>
 
-<div class="contenedor-login">
+    <div class="contenedor-login">
 
-<h2>Crear Cuenta</h2>
+        <h1>Tienda de Celulares</h1>
 
-<form action="../php/registro.php" method="POST">
+        <h2>Crear Cuenta</h2>
 
-<input
-type="text"
-name="nombre"
-placeholder="Nombre completo"
-required>
+        <form action="../php/registro.php" method="POST">
 
-<input
-type="email"
-name="correo"
-placeholder="Correo electrónico"
-required>
+            <input
+                type="text"
+                name="nombre"
+                placeholder="Nombre completo"
+                required>
 
-<input
-type="password"
-name="password"
-placeholder="Contraseña"
-required>
+            <input
+                type="email"
+                name="correo"
+                placeholder="Correo electrónico"
+                required>
 
-<button type="submit">
-Registrarse
-</button>
+            <input
+                type="password"
+                name="password"
+                placeholder="Contraseña"
+                required>
 
-</form>
+            <button type="submit">
+                Registrarse
+            </button>
 
-<p>
-¿Ya tienes una cuenta?
-<a href="login.php">Inicia sesión</a>
-</p>
+        </form>
 
-<a class="volver" href="../index.php">← Volver al inicio</a>
+        <br>
 
-</div>
+        <p>¿Ya tienes una cuenta?</p>
+
+        <a href="../index.php">
+            Iniciar Sesión
+        </a>
+
+    </div>
 
 </body>
+
 </html>

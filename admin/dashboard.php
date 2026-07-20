@@ -17,7 +17,6 @@ if($_SESSION["tipo"]!="admin"){
 <meta charset="UTF-8">
 
 <title>Administrador</title>
-
 <link rel="stylesheet" href="../css/estilos.css">
 
 </head>

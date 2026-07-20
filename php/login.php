@@ -1,53 +1,69 @@
 <?php
 
 error_reporting(E_ALL);
-ini_set('display_errors',1);
+ini_set('display_errors', 1);
 
 session_start();
 
-include("conexion.php");;
+include("conexion.php");
 
-$correo=$_POST["correo"];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-$password=$_POST["password"];
+    $correo = $_POST["correo"];
+    $password = $_POST["password"];
+    $conexion = new mysqli("localhost", "root", "", "proyecto");
 
-$sql="SELECT * FROM usuarios
+    $sql = "SELECT * FROM usuarios WHERE correo='$correo'";
 
-WHERE correo='$correo'";
+    $resultado = $conexion->query($sql);
 
-$resultado=$conexion->query($sql);
+    if ($resultado->num_rows > 0) {
 
-if($resultado->num_rows>0){
+        $usuario = $resultado->fetch_assoc();
 
-$usuario=$resultado->fetch_assoc();
+        if (password_verify($password, $usuario["password"])) {
 
-if(password_verify($password,$usuario["password"])){
+            $_SESSION["id"] = $usuario["id"];
+            $_SESSION["nombre"] = $usuario["nombre"];
+            $_SESSION["tipo"] = $usuario["tipo"];
 
-$_SESSION["id"]=$usuario["id"];
+            if ($usuario["tipo"] == "admin") {
 
-$_SESSION["nombre"]=$usuario["nombre"];
+                header("Location: ../admin/dashboard.php");
+                exit();
 
-$_SESSION["tipo"]=$usuario["tipo"];
+            } else {
 
-if($usuario["tipo"]=="admin"){
+               
+                header("Location: catalogoP.php");
+                exit();
 
-header("Location:../admin/dashboard.php");
+               
 
-}else{
+            }
 
-header("Location:catalogo.php");
+        } else {
 
-}
+            echo "<script>
+                    alert('Contraseña incorrecta');
+                    window.location='../index.php';
+                  </script>";
 
-}else{
+        }
 
-echo "Contrasena incorrecta";
+    } else {
 
-}
+        echo "<script>
+                alert('Usuario no encontrado');
+                window.location='../index.php';
+              </script>";
 
-}else{
+    }
 
-echo "Usuario no encontrado";
+} else {
+
+    header("Location: ../index.php");
+    exit();
 
 }
 
