@@ -25,7 +25,7 @@ if(!isset($_SESSION['usuario'])){
 
 </head>
 
-
+<center>
 <body>
 
 
@@ -48,7 +48,9 @@ if(!isset($_SESSION['usuario'])){
 
 
 <a href="catalogoP.php">
+    <button type="submit">
 Seguir comprando
+    </button>
 </a>
 
 
@@ -158,7 +160,7 @@ function enviarCarrito(){
 
 </script>
 
-
+</center>
 </body>
 
 </html>
